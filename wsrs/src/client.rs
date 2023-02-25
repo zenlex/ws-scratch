@@ -4,7 +4,9 @@ pub fn init_client() {
     env_logger::init();
 
     let (mut socket, response) =
-        connect(Url::parse("ws://zenlex.imperfect.systems/socket").unwrap())
+        // connect(Url::parse("ws://zenlex.imperfect.systems/socket").unwrap())
+        //     .expect("Can't connect");
+        connect(Url::parse("ws://127.0.0.1:3012").unwrap())
             .expect("Can't connect");
 
     println!("Connected to server");
@@ -13,10 +15,6 @@ pub fn init_client() {
     for (ref header, _value) in response.headers() {
         println!("* {}", header)
     }
-
-    // socket
-    //     .write_message(Message::Text("Hello Websocket".into()))
-    //     .unwrap();
 
     loop {
         let mut line = String::new();
